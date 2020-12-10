@@ -8,9 +8,9 @@
 
 ```shell
 #克隆项目
-git clone 
+git clone https://github.com/gaadev/aggr.git
 #进入项目
-cd 
+cd aggr
 #项目打包
 gradle build
 ```
