@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'idea'
+}
+
+group = "${projectGroupId}"
+version = "${projectVersion}"
+sourceCompatibility = "${javaCompileVersion}"
+
+repositories {
+    // 定义仓库位置
+    mavenLocal()
+    maven { url "${aliyun_nexusUrl}" }  //Maven 仓库
+    maven { url "https://repo.spring.io/libs-release" }
+    jcenter() //JFrog公司提供的性能更好的maven仓库
+    mavenCentral() // 中央库
+}
+
+//构建java项目默认目录
+task createJavaProject {
+    sourceSets*.java.srcDirs*.each { if (!it.exists()) it.mkdirs() }
+    sourceSets*.resources.srcDirs*.each { if (!it.exists()) it.mkdirs() }
+    if (!getBuildFile().exists()) {
+        getBuildFile().createNewFile()
+        getBuildFile().setText(defaultText1)
+    }
+}
+
+dependencies {
+    compile "commons-beanutils:commons-beanutils:${beanUtilsVersion}"
+    compile "cglib:cglib-nodep:${cglibNodepVersion}"
+    compile "com.google.collections:google-collections:${googleCollectionsVersion}"
+}
